@@ -1,9 +1,13 @@
 import React, { Component } from "react";
 import "./App.css";
-import { contacts } from "./data";
+import { contacts, Person } from "./data";
 import { ContactCard } from "./contact-card";
 
 class App extends Component {
+  sortByLastname(a: Person, b: Person) {
+    return [...a.names].pop()!.localeCompare([...b.names].pop()!);
+  }
+
   render() {
     return (
       <div className="App">
@@ -12,7 +16,7 @@ class App extends Component {
         </header>
 
         <main>
-          {contacts.map(c => (
+          {contacts.sort(this.sortByLastname).map(c => (
             <ContactCard key={c.email} person={c} />
           ))}
         </main>
